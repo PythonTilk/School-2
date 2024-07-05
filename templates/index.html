@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Euro 2024 Tipp Game</title>
+</head>
+<body>
+    <h1>Euro 2024 Tipp Game</h1>
+    <form action="/submit_prediction" method="post">
+        <label for="user">User:</label>
+        <input type="text" id="user" name="user" required>
+        
+        <table>
+            <tr>
+                <th>Match</th>
+                <th>Prediction (Home - Away)</th>
+            </tr>
+            {% for match in matches %}
+            <tr>
+                <td>{{ match.home_team }} vs {{ match.away_team }} on {{ match.match_date }}</td>
+                <td>
+                    <input type="number" name="home_score" min="0" required> - 
+                    <input type="number" name="away_score" min="0" required>
+                    <input type="hidden" name="match_id" value="{{ match.id }}">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button type="submit">Submit Predictions</button>
+    </form>
+</body>
+</html>
